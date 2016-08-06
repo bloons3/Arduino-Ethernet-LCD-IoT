@@ -57,7 +57,7 @@ void setup()   /*----( SETUP: RUNS ONCE )----*/
   if (client.connect(server, 80)) {
     Serial.println("connected");
     Serial.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=5 HTTP/1.1");
-    client.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=149849 HTTP/1.0");
+    client.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=0 HTTP/1.0");
     client.println();
     lcd.setCursor(0, 0);
     lcd.print("Sent!");
@@ -76,10 +76,10 @@ void httpRequest() {
     Serial.println("connecting...");
     // send the HTTP GET request:
     String mil = String(millis(), DEC);
-    lcd.setCursor(0, 3);
+    lcd.setCursor(0, 2);
     lcd.print(millis());
-    Serial.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=" + mil + "HTTP/1.0");
-    client.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=" + mil + "HTTP/1.0");
+    Serial.println(mil);
+    client.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=" + mil + " HTTP/1.0");
     client.println("Host: www.arduino.cc");
     client.println("User-Agent: arduino-ethernet");
     client.println("Connection: close");
@@ -96,7 +96,7 @@ void httpRequest() {
 
 void loop()   /*----( LOOP: RUNS CONSTANTLY )----*/
 {
-  if (client.available()) {
+  while (client.available()) {
     char c = client.read();
     Serial.print(c);
   }
