@@ -20,7 +20,7 @@ EthernetClient client;
 char server[] = "api.thingspeak.com"; //thingspeak API
 
 unsigned long lastConnectionTime = 0;             // last time you connected to the server, in milliseconds
-const unsigned long postingInterval = 4L * 1000L; // delay between updates, in milliseconds
+const unsigned long postingInterval = 1L * 1000L; // delay between updates, in milliseconds
 // the "L" is needed to use long type numbers
 
 void setup()   /*----( SETUP: RUNS ONCE )----*/
@@ -35,7 +35,7 @@ void setup()   /*----( SETUP: RUNS ONCE )----*/
     lcd.backlight();
     delay(100);
     lcd.noBacklight();
-    delay(100);
+    delay(50);
   }
   lcd.backlight();
 
@@ -56,8 +56,8 @@ void setup()   /*----( SETUP: RUNS ONCE )----*/
 
   if (client.connect(server, 80)) {
     Serial.println("connected");
-    Serial.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=5 HTTP/1.1");
-    client.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=0 HTTP/1.0");
+    Serial.println("GET /update?api_key=RVLD035W0B2H5AGY&field1=0 HTTP/1.0");
+    client.println("GET /update?api_key=RVLD035W0B2H5AGY&field1=0 HTTP/1.0");
     client.println();
     lcd.setCursor(0, 0);
     lcd.print("Sent!");
@@ -79,7 +79,7 @@ void httpRequest() {
     lcd.setCursor(0, 2);
     lcd.print(millis());
     Serial.println(mil);
-    client.println("GET /update?api_key=4AANO8W2IMUJRLBA&field1=" + mil + " HTTP/1.0");
+    client.println("GET /update?api_key=RVLD035W0B2H5AGY&field1=" + mil + " HTTP/1.0");
     client.println("Host: www.arduino.cc");
     client.println("User-Agent: arduino-ethernet");
     client.println("Connection: close");
